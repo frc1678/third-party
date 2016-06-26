@@ -1,0 +1,12 @@
+*/.git
+*/cmake
+*/*.bat
+*/*.yml
+*/WORKSPACE
+
+protobuf/java
+protobuf/objectivec
+protobuf/csharp
+protobuf/php
+protobuf/js
+protobuf/javanano
