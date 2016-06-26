@@ -61,7 +61,8 @@ cc_library(
   ],
   linkopts = [
     '-lpthread',
-    '-ldl'
+    '-ldl',
+    '-lm'
   ],
   deps = [
     ':hal',
