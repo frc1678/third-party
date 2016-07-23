@@ -18,5 +18,7 @@ genrule(
 py_binary(
   name = 'unitscpp_generator',
   srcs = ['gen.py'],
+  srcs_version = 'PY2AND3',
+  default_python_version = 'PY3',
   main = 'gen.py'
 )
