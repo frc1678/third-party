@@ -1215,8 +1215,6 @@ def ConstructDerivedUnits():
         s = s.replace("^", "**")   # Let's '^' be used for exponentiation
         try:
             c = compile(s, "", "eval")
-            print(d)
-            print(s)
             result = eval(s, copy.copy(d))
         except Exception as e:
             err("Derived unit '%s' not a valid expression.%s" % (name, nl))
