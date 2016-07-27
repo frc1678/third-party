@@ -554,11 +554,11 @@ template<%(IPAR)s>
 %(class_identifier)s %(UnitsClass)s
 {
     public:
-        %(UnitsClass)s(NT value_=NT(0)) : value(value_) {}
+        constexpr %(UnitsClass)s(NT value_=NT(0)) : value(value_) {}
 
         // This turns the class into a function object that allows
         // the user to easily get at the value.
-        NT operator()() const { return value; }
+        constexpr NT operator()() const { return value; }
 
         // Helper function to get a text representation of the
         // object's dimensions.  It is static because the
@@ -571,37 +571,37 @@ template<%(IPAR)s>
         }
 
         // Helper function for unit conversions.
-        NT to(const %(UnitsClass)s & u) const
+        constexpr NT to(const %(UnitsClass)s & u) const
         {
             return value/u.value;
         }
 
-        %(UnitsClass)s & operator=(const %(UnitsClass)s & rhs)
+        constexpr %(UnitsClass)s & operator=(const %(UnitsClass)s & rhs)
         {
             value = rhs.value;
             return *this;
         }
 
         // Arithmetic operators
-        %(UnitsClass)s & operator+=(const %(UnitsClass)s & rhs)
+        constexpr %(UnitsClass)s & operator+=(const %(UnitsClass)s & rhs)
         {
             value += rhs.value;
             return *this;
         }
 
-        %(UnitsClass)s & operator-=(const %(UnitsClass)s & rhs)
+        constexpr %(UnitsClass)s & operator-=(const %(UnitsClass)s & rhs)
         {
             value -= rhs.value;
             return *this;
         }
 
-        Units & operator*=(const NT & rhs)
+        constexpr Units & operator*=(const NT & rhs)
         {
             value *= rhs;
             return *this;
         }
 
-        Units & operator/=(const NT & rhs)
+        constexpr Units & operator/=(const NT & rhs)
         {
             value /= rhs;
             return *this;
@@ -614,7 +614,7 @@ template<%(IPAR)s>
 
 // Addition
 template <%(IPAR)s>
-const %(UNIT)s operator+(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr %(UNIT)s operator+(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return %(UNIT)s(lhs() + rhs());
 }
@@ -622,7 +622,7 @@ const %(UNIT)s operator+(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 
 // Subtraction
 template <%(IPAR)s>
-const %(UNIT)s operator-(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr %(UNIT)s operator-(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return %(UNIT)s(lhs() - rhs());
 }
@@ -630,7 +630,7 @@ const %(UNIT)s operator-(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 
 // Negation
 template <%(IPAR)s>
-const %(UNIT)s operator-(const %(UNIT)s & rhs)
+constexpr %(UNIT)s operator-(const %(UNIT)s & rhs)
 {
     return %(UNIT)s(-rhs());
 }
@@ -638,19 +638,19 @@ const %(UNIT)s operator-(const %(UNIT)s & rhs)
 
 // Multiplication
 template <%(IPAR)s>
-const %(UNIT)s operator*(const NT & lhs, const %(UNIT)s & rhs)
+constexpr %(UNIT)s operator*(const NT & lhs, const %(UNIT)s & rhs)
 {
     return %(UNIT)s(lhs*rhs());
 }
 
 template <%(IPAR)s>
-const %(UNIT)s operator*(const %(UNIT)s & lhs, const NT & rhs)
+constexpr %(UNIT)s operator*(const %(UNIT)s & lhs, const NT & rhs)
 {
     return rhs*lhs;
 }
 
 template <%(IPARmul)s>
-const %(UnitsClass)s<%(PARaPb)s> operator*(const %(UnitsClass)s<%(PARa)s> & lhs, const %(UnitsClass)s<%(PARb)s> & rhs)
+constexpr %(UnitsClass)s<%(PARaPb)s> operator*(const %(UnitsClass)s<%(PARa)s> & lhs, const %(UnitsClass)s<%(PARb)s> & rhs)
 {
     return %(UnitsClass)s<%(PARaPb)s>(lhs()*rhs());
 }
@@ -658,19 +658,19 @@ const %(UnitsClass)s<%(PARaPb)s> operator*(const %(UnitsClass)s<%(PARa)s> & lhs,
 
 // Division
 template <%(IPAR)s>
-const %(UNIT)s operator/(const %(UNIT)s & lhs, const NT & rhs)
+constexpr %(UNIT)s operator/(const %(UNIT)s & lhs, const NT & rhs)
 {
     return %(UNIT)s(lhs()/rhs);
 }
 
 template <%(IPAR)s>
-const %(mUNIT)s operator/(const NT & lhs, const %(UNIT)s & rhs)
+constexpr %(mUNIT)s operator/(const NT & lhs, const %(UNIT)s & rhs)
 {
     return %(mUNIT)s(lhs/rhs());
 }
 
 template <%(IPARmul)s>
-const %(UnitsClass)s<%(PARaMb)s> operator/(const %(UnitsClass)s<%(PARa)s> & lhs, const %(UnitsClass)s<%(PARb)s> & rhs)
+constexpr %(UnitsClass)s<%(PARaMb)s> operator/(const %(UnitsClass)s<%(PARa)s> & lhs, const %(UnitsClass)s<%(PARb)s> & rhs)
 {
     return %(UnitsClass)s<%(PARaMb)s>(lhs()/rhs());
 }
@@ -678,37 +678,37 @@ const %(UnitsClass)s<%(PARaMb)s> operator/(const %(UnitsClass)s<%(PARa)s> & lhs,
 
 // Comparisons
 template <%(IPAR)s>
-bool operator==(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator==(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return (lhs() == rhs());
 }
 
 template <%(IPAR)s>
-bool operator==(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator==(const %(UNIT)s & lhs, const NT & rhs)
 {
     return (lhs() == rhs);
 }
 
 template <%(IPAR)s>
-bool operator==(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator==(const NT & lhs, const %(UNIT)s & rhs)
 {
     return (lhs == rhs());
 }
 
 template <%(IPAR)s>
-bool operator!=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator!=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return not (lhs() == rhs());
 }
 
 template <%(IPAR)s>
-bool operator!=(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator!=(const %(UNIT)s & lhs, const NT & rhs)
 {
     return not (lhs() == rhs);
 }
 
 template <%(IPAR)s>
-bool operator!=(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator!=(const NT & lhs, const %(UNIT)s & rhs)
 {
     return not (lhs == rhs());
 }
@@ -716,82 +716,82 @@ bool operator!=(const NT & lhs, const %(UNIT)s & rhs)
 
 // Ordering
 template <%(IPAR)s>
-bool operator<=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator<=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return lhs() <= rhs();
 }
 
 template <%(IPAR)s>
-bool operator<=(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator<=(const %(UNIT)s & lhs, const NT & rhs)
 {
     return (lhs() <= rhs);
 }
 
 template <%(IPAR)s>
-bool operator<=(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator<=(const NT & lhs, const %(UNIT)s & rhs)
 {
     return (lhs <= rhs());
 }
 
 
 template <%(IPAR)s>
-bool operator>=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator>=(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return lhs() >= rhs();
 }
 
 template <%(IPAR)s>
-bool operator>=(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator>=(const %(UNIT)s & lhs, const NT & rhs)
 {
     return (lhs() >= rhs);
 }
 
 template <%(IPAR)s>
-bool operator>=(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator>=(const NT & lhs, const %(UNIT)s & rhs)
 {
     return (lhs >= rhs());
 }
 
 
 template <%(IPAR)s>
-bool operator<(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator<(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return lhs() < rhs();
 }
 
 template <%(IPAR)s>
-bool operator<(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator<(const %(UNIT)s & lhs, const NT & rhs)
 {
     return (lhs() < rhs);
 }
 
 template <%(IPAR)s>
-bool operator<(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator<(const NT & lhs, const %(UNIT)s & rhs)
 {
     return (lhs < rhs());
 }
 
 
 template <%(IPAR)s>
-bool operator>(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
+constexpr bool operator>(const %(UNIT)s & lhs, const %(UNIT)s & rhs)
 {
     return lhs() > rhs();
 }
 
 template <%(IPAR)s>
-bool operator>(const %(UNIT)s & lhs, const NT & rhs)
+constexpr bool operator>(const %(UNIT)s & lhs, const NT & rhs)
 {
     return (lhs() > rhs);
 }
 
 template <%(IPAR)s>
-bool operator>(const NT & lhs, const %(UNIT)s & rhs)
+constexpr bool operator>(const NT & lhs, const %(UNIT)s & rhs)
 {
     return (lhs > rhs());
 }
 
 template <%(IPAR)s>
-std::ostream & operator<<(std::ostream & s, const %(UNIT)s & rhs)
+constexpr std::ostream & operator<<(std::ostream & s, const %(UNIT)s & rhs)
 {
     return s << rhs();
 }
@@ -1003,7 +1003,7 @@ def CheckData():
         if len(items) < 4:
             err("Error:  constant '%s' is of improper form%s" % (item, nl))
             sys.exit(1)
-        if items[0] == "const":
+        if items[0] == "const" or items[0] == "constexpr":
             key = items[2]
         else:
             key = items[1]
